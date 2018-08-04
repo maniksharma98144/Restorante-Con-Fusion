@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import Iframe from 'react-iframe';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -219,7 +220,13 @@ class Contact extends Component {
                         </address>
                     </div>
                     <div className="col-12 col-sm-6 offset-sm-1">
-                        <h5>Map of our Location</h5>
+                        <h5>Map of our Location:</h5>
+                        <div class="mapouter">
+                            <div class="gmap_canvas">
+                                <Iframe width="600" height="400" id="gmap_canvas" url="https://maps.google.com/maps?q=121%2C%20Clear%20Water%20Bay%20Road%20Clear%20Water%20Bay%2C%20Kowloon%20HONG%20KONG&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"/>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-12 col-sm-11 offset-sm-1">
                         <div className="btn-group" role="group">

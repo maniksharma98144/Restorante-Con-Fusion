@@ -1,3 +1,5 @@
+//if not use combineReducers
+
 /*import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';

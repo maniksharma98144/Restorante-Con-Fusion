@@ -5,7 +5,6 @@ import {
 } from 'reactstrap';
 
 function RenderCard({ item }) {
-
     return (
         <Card>
             <CardImg src={item.image} alt={item.name} />
@@ -16,7 +15,6 @@ function RenderCard({ item }) {
             </CardBody>
         </Card>
     );
-
 }
 
 function Home(props) {

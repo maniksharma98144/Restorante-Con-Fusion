@@ -24,7 +24,7 @@ function RenderDish(props) {
     )
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
     var obj = {
         '01': 'Jan',
         '02': 'Feb',
@@ -58,7 +58,7 @@ function RenderComments({ comments, addComment, dishId }) {
                         )
                     })}
                 </ul>
-                <CommentForm dishId={dishId} addComment={addComment} />
+                <CommentForm dishId={dishId} postComment={postComment} />
             </div>
         )
     }
@@ -83,7 +83,7 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        this.props.addComment(this.props.dishId, values.ratings, values.name, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -109,15 +109,15 @@ class CommentForm extends Component {
                                     </Control.select>
                                 </Row>
                                 <Row className="form-group">
-                                    <label htmlFor="name">Your Name</label>
-                                    <Control.text model=".name" className="form-control" id="name" name="name" placeholder="Your Name"
+                                    <label htmlFor="author">Your Name</label>
+                                    <Control.text model=".author" className="form-control" id="author" name="author" placeholder="Your Name"
                                         validators={{
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }} />
                                     <Errors
                                         className="text-danger"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             minLength: "Must be Greater than 2 characters",
@@ -144,49 +144,49 @@ class CommentForm extends Component {
 
 const DishDetail = (props) => {
     if (props.isLoading) {
-        return(
+        return (
             <div className="container">
-                <div className="row">            
+                <div className="row">
                     <Loading />
                 </div>
             </div>
         );
     }
     else if (props.errMess) {
-        return(
+        return (
             <div className="container">
-                <div className="row">            
+                <div className="row">
                     <h4>{props.errMess}</h4>
                 </div>
             </div>
         );
     }
-    else if (props.dish != null) 
-    return (
-        <div className="container">
-            <div className="row">
-                <Breadcrumb>
+    else if (props.dish != null)
+        return (
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
 
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>{props.dish.name}</h3>
-                    <hr />
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderComments comments={props.comments}
+                            postComment={props.postComment}
+                            dishId={props.dish.id}
+                        />
+                    </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    <RenderDish dish={props.dish} />
-                </div>
-                <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments}
-                        addComment={props.addComment}
-                        dishId={props.dish.id}
-                    />
-                </div>
-            </div>
-        </div>
-    );
+        );
 }
 export default DishDetail;

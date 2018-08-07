@@ -8,37 +8,30 @@ import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-function RenderDish(props) {
+function RenderDish({ dish }) {
     return (
-        <Card>
-            <CardImg top src={baseUrl + props.dish.image} alt={props.dish.name} />
-            <CardBody>
-                <CardTitle>{props.dish.name}</CardTitle>
-                <CardText>{props.dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+            <Card>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     )
 }
 
 function RenderComments({ comments, postComment, dishId }) {
-    var obj = {
-        '01': 'Jan',
-        '02': 'Feb',
-        '03': 'Mar',
-        '04': 'Apr',
-        '05': 'May',
-        '06': 'Jun',
-        '07': 'Jul',
-        '08': 'Aug',
-        '09': 'Sep',
-        '10': 'Oct',
-        '11': 'Nov',
-        '12': 'Dec'
-    };
     if (comments.length === 0) {
         return (
             <div></div>
@@ -49,14 +42,18 @@ function RenderComments({ comments, postComment, dishId }) {
             <div className="col-12 col-md-10 m-1">
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
-                    {comments.map((data) => {
-                        return (
-                            <div key={data.id}>
-                                <li>{data.comment}</li>
-                                <p>-- {data.author}, {obj[data.date.substr(5, 2)]} {data.date.substr(8, 2)}, {data.date.substr(0, 4)}</p>
-                            </div>
-                        )
-                    })}
+                    <Stagger in>
+                        {comments.map((comment) => {
+                            return (
+                                <Fade in>
+                                    <li key={comment.id}>
+                                        <p>{comment.comment}</p>
+                                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}</p>
+                                    </li>
+                                </Fade>
+                            );
+                        })}
+                    </Stagger>
                 </ul>
                 <CommentForm dishId={dishId} postComment={postComment} />
             </div>

@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Dishes } from './dishes';
 import { Comments } from './comments';
 import { Leaders } from './leaders';

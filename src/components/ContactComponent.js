@@ -91,8 +91,8 @@ class Contact extends Component {
     }*/
 
     handleSubmit(values) {
-        alert('Current State is: ' + JSON.stringify(values));
-        this.props.resetFeedbackForm();
+        alert('Thank You For Your Feedback!\n ' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.message);
         // event.preventDefault();
     }
 
@@ -222,8 +222,8 @@ class Contact extends Component {
                     </div>
                     <div className="col-12 col-sm-6 offset-sm-1">
                         <h5>Map of our Location:</h5>
-                        <div class="mapouter">
-                            <div class="gmap_canvas">
+                        <div className="mapouter">
+                            <div className="gmap_canvas">
                                 <Iframe width="600" height="400" id="gmap_canvas" url="https://maps.google.com/maps?q=121%2C%20Clear%20Water%20Bay%20Road%20Clear%20Water%20Bay%2C%20Kowloon%20HONG%20KONG&t=&z=13&ie=UTF8&iwloc=&output=embed"
                                     frameborder="0" scrolling="no" marginheight="0" marginwidth="0" />
                             </div>

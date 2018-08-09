@@ -3,19 +3,24 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import { Stagger, Fade } from 'react-animation-components';
 
 function RenderLeader(props) {
     return (
-        <Media tag="li">
-            <Media left middle>
-                <Media object src={baseUrl + props.leader.image} alt={props.leader.name} height='200' width='200' />
+        <Stagger in>
+            <Media tag="li">
+                <Media left middle>
+                    <Media object src={baseUrl + props.leader.image} alt={props.leader.name} height='200' width='200' />
+                </Media>
+                <Media body className="ml-5">
+                    <Fade in>
+                    <Media heading>{props.leader.name}</Media>
+                    <p>{props.leader.designation}</p>
+                    <p>{props.leader.description}</p>
+                    </Fade>
+                </Media>
             </Media>
-            <Media body className="ml-5">
-                <Media heading>{props.leader.name}</Media>
-                <p>{props.leader.designation}</p>
-                <p>{props.leader.description}</p>
-            </Media>
-        </Media>
+        </Stagger>
     )
 }
 

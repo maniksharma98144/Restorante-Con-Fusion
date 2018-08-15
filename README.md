@@ -1,7 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Install required node_modules using npm install from root folder.
-To Run The App:
+Install required node_modules using "npm install" from root folder to run the app in Development Mode.
+
+-To Run The App using Json-Server:
 run "npm install json-server -g" on cmd.
 - cd to json-server
 - run command "json-server --watch db.json -p 3001 -d 2000"

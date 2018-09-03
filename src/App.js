@@ -4,10 +4,15 @@ import './App.css';
 import Main from './components/MainComponent';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import { loadReCaptcha } from "react-recaptcha-google";
 
 const store = ConfigureStore();
 
 class App extends Component {
+
+  componentDidMount() {
+    loadReCaptcha();
+  }
   render() {
     return (
       <Provider store={store}>

@@ -5,6 +5,7 @@ import {
     Form, FormGroup, Input, Label
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import Captcha from './CaptchaComponent';
 
 class Header extends Component {
     constructor(props) {
@@ -99,6 +100,9 @@ class Header extends Component {
                                         innerRef={(input) => this.remember = input} />
                                     Remember me
                                 </Label>
+                            </FormGroup>
+                            <FormGroup>
+                                <Captcha />
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Login</Button>
                         </Form>
